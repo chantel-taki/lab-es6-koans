@@ -213,8 +213,8 @@ describe("destructuring arrays makes shorter code. ", () => {
   it("chained assignments", () => {
     let c, d;
     /* let a, b = c, d = [1, 2] */
-    let a = (c = 1);
-    let b = (d = 2);
+    let [a,b] = [c,d] = [1,2];
+    
      expect([a, b, c, d]).toEqual([1, 2, 1, 2]);
   });
 });
@@ -228,7 +228,8 @@ describe("destructuring also works on strings. ", () => {
 
   it("missing characters are undefined", () => {
     /* const [a, c] = "ab" */
-    // expect(c).toBeUndefined();
+    const [c] = "";
+     expect(c).toBeUndefined();
   });
 });
 
@@ -236,29 +237,35 @@ describe("destructuring objects. ", () => {
   it("is simple", () => {
     const obj = { x: 1 };
     /* const {????} = obj */
-    // expect(x).toEqual(1);
+    const {x} = obj;
+
+     expect(x).toEqual(1);
   });
 
   describe("nested", () => {
     it("multiple objects", () => {
       const magic = { first: 23, second: 42 };
       /* const first, second  = ?????? */
-      // expect(first).toEqual(23);
-      // expect(second).toEqual(42);
+      const {first, second} = magic;
+       expect(first).toEqual(23);
+       expect(second).toEqual(42);
     });
     it("object and array", () => {
       /* const { z: [????] } = { z: [23, 42] } */
-      // expect(x).toEqual(42);
+      const {z:[,x]} = {z: [23, 42]};
+       expect(x).toEqual(42);
     });
     it("array and object", () => {
       /* const [????] = [null, [{ env: "browser", lang: "ES6" }]] */
-      // expect(lang).toEqual('ES6');
+      const [,[{env,lang}]] = [null, [{ env: "browser", lang: "ES6" }]];
+       expect(lang).toEqual('ES6');
     });
   });
 
   describe("interesting", () => {
     it("missing refs become undefined", () => {
       /* const {????} = { x: 1, y: 2 } */
+      const {x,y,z} = { x: 1, y: 2 };
       // expect(z).toBeUndefined();
     });
   });
