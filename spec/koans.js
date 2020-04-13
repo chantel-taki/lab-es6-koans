@@ -4,28 +4,32 @@ describe("`let` vs. `var`.", () => {
   it("the scope for `var` is not restricted to the block", () => {
     if (true) {
       /* use the correct keyword to initialize `varX` here */
+      var varX = true;
     }
-    // expect(varX).toBe(true);
+     expect(varX).toBe(true);
   });
 
   it("`let` restricts scope to inside the block", () => {
     /* initialize the variable `letX` */
     /* here ? */
+    let letX = true;
     if (true) {
       /* or here ? */
     }
-    // expect(letX).toBe(true);
+     expect(letX).toBe(true);
   });
 });
 
 describe("`const` is like `let` plus read-only. ", () => {
   it("primitives declared with `const` cannot be reassigned", () => {
     /*let or const? x = 0;*/
-    // expect(() => { x = 1; }).toThrow()
+    const x = 0;
+     expect(() => { x = 1; }).toThrow()
   });
   it("objects declared with `const` cannot be reassigned", () => {
     /*let or const? y = [1, 2, 3];*/
-    // expect(() => { y = [4, 5, 6]; }).toThrow()
+    const y = [1,2,3];
+     expect(() => { y = [4, 5, 6]; }).toThrow()
   });
 
   it("objects declared with `const` can still be mutated", () => {
@@ -33,15 +37,18 @@ describe("`const` is like `let` plus read-only. ", () => {
     const obj = { x: 1 };
 
     /* write your code here */
+    arr[0] = 0;
+    obj.x = 2;
 
-    // expect(arr[0]).toBe(0);
-    // expect(obj.x).toBe(2);
+     expect(arr[0]).toBe(0);
+     expect(obj.x).toBe(2);
   });
 
   it("`const` scope leaks too", () => {
     /*`const`? notChangeable = 23;*/
+    const notChangeable = 23;
     if (true) {
-      // expect(notChangeable).toBe(23);
+       expect(notChangeable).toBe(23);
     }
   });
 });
@@ -49,7 +56,8 @@ describe("`const` is like `let` plus read-only. ", () => {
 describe("`string.includes()` finds string within another string. ", () => {
   it("returns `true` if a character is found in a string", () => {
     /* const char = ???? */
-    // expect('xyz'.includes(char)).toBe(true);
+    const char = 'xyz';
+     expect('xyz'.includes(char)).toBe(true);
   });
   it("returns `false` if character was not found", () => {
     /* const char = ???? */
